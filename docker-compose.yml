@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  combinator:
+    image: postgres:13
+    restart: always
+    environment:
+      - POSTGRES_USER=combinator
+      - POSTGRES_PASSWORD=combinator
+      - POSTGRES_DB=combinator
+    volumes:
+      - ./docker/data/postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'

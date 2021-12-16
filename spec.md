@@ -28,14 +28,12 @@ DELETE /set/:id
 ## Combinations
 
 ```
-GET /set/:id/combinations?ordered=ascending
-GET /set/:id/combinations?ordered=descending
-GET /set/:id/combinations?exclude=itemId
+GET /set/:id/combinations?page=1?limit=10?exclude=itemId
 GET /set/:id/combination/:id
 POST /set/:id/combination/:id
 ```
 
-# Objects
+# Models
 
 ## Auth
 
@@ -48,11 +46,12 @@ interface AuthResponse {
 }
 ```
 
-## User
+## Responses
 
 ```ts
 interface UserResponse {
   id: string;
+  name?: string;
   email?: string;
   password?: string;
   created_at: string;
@@ -76,6 +75,7 @@ interface SetResponse {
 ```ts
 interface CombinationResponse {
   id: string;
+  items: string[string[]];
   created_at: string;
   updated_at: string;
 }

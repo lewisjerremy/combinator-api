@@ -1,0 +1,4 @@
+.env
+dist
+docker
+yarn-error.log

@@ -1,11 +1,22 @@
 import express from 'express';
-import ENVIRONMENT from './config/environment';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import cors from 'cors';
+import ENV from './config/environment.config';
+import { redis } from './config/redis.config';
 
 export function server() {
   const app = express();
-  const port = ENVIRONMENT.PORT;
+  const PORT = ENV.PORT;
 
-  return app.listen(port, () =>
-    console.log(`🚀 Listening at localhost:${port}`),
+  app.use(helmet());
+  app.use(morgan('tiny'));
+  app.use(cors());
+  app.use(express.json());
+
+  redis();
+
+  return app.listen(PORT, () =>
+    console.log(`🚀 Listening at localhost:${PORT}`),
   );
 }

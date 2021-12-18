@@ -2,14 +2,15 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const ENVIRONMENT = {
+const ENV = {
   NODE: {
     DEVELOPMENT: process.env.NODE_ENV === 'development',
     STAGING: process.env.NODE_ENV === 'staging',
     PRODUCTION: process.env.NODE_ENV === 'production',
   },
-  PORT: process.env.PORT || 1000,
-  JWT: process.env.jwt || 'secret',
+  PORT: parseInt(`${process.env.PORT}`),
+  JWT: `${process.env.JWT}`,
+  REDIS_URL: `${process.env.REDIS_URL}`,
 };
 
-export default ENVIRONMENT;
+export default ENV;

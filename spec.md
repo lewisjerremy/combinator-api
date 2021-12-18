@@ -3,7 +3,8 @@
 ## Authentication
 
 ```
-POST /auth/signup
+POST /auth/signup?method=email
+POST /auth/signup?method=anonymous
 POST /auth/login?method=email
 POST /auth/login?method=anonymous
 ```

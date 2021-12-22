@@ -2,6 +2,7 @@ import { prisma } from '../config/db.config';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import {
+  Authorization,
   AuthResponse,
   PostLoginAnonymousRequest,
   PostLoginEmailRequest,
@@ -29,7 +30,7 @@ export async function loginAnonymous(
   const validPassword = await bcrypt.compare(req.password, dbUser.password);
   if (!validPassword) throw new ValidationError(`password not valid`);
 
-  const token = jwt.sign({ userId: dbUser.id }, ENV.JWT);
+  const token = jwt.sign({ userId: dbUser.id } as Authorization, ENV.JWT);
   const { id, email, createdAt, updatedAt } = dbUser;
 
   return {
@@ -55,7 +56,7 @@ export async function loginEmail(
   const validPassword = await bcrypt.compare(req.password, dbUser.password);
   if (!validPassword) throw new ValidationError(`password not valid`);
 
-  const token = jwt.sign({ userId: dbUser.id }, ENV.JWT);
+  const token = jwt.sign({ userId: dbUser.id } as Authorization, ENV.JWT);
   const { id, email, createdAt, updatedAt } = dbUser;
 
   return {
@@ -81,7 +82,7 @@ export async function signupAnonymous(
     data: { password: hashedPassword },
   });
 
-  const token = jwt.sign({ userId: dbUser.id }, ENV.JWT);
+  const token = jwt.sign({ userId: dbUser.id } as Authorization, ENV.JWT);
   const { id, email, createdAt, updatedAt } = dbUser;
 
   return {
@@ -112,7 +113,7 @@ export async function signupEmail(
     data: { email: req.email, password: hashedPassword },
   });
 
-  const token = jwt.sign({ userId: dbUser.id }, ENV.JWT);
+  const token = jwt.sign({ userId: dbUser.id } as Authorization, ENV.JWT);
   const { id, email, createdAt, updatedAt } = dbUser;
 
   return {

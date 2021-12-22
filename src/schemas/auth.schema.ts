@@ -5,7 +5,7 @@ const emailSchema = Joi.string().email({
   minDomainSegments: 2,
 });
 
-const passwordSchema = Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'));
+const passwordSchema = Joi.string().min(8);
 
 export const loginAnonymousSchema = Joi.object({
   id: idSchema.required(),

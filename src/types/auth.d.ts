@@ -14,3 +14,11 @@ export type PostSignupAnonymousRequest = Pick<User, 'password'>;
 export type PostSignupEmailRequest = Pick<User, 'email', 'password'>;
 
 type Token = string;
+
+export interface Authorization {
+  userId: number;
+}
+
+export interface DecodedToken extends Authorization {
+  userId?: string;
+}
